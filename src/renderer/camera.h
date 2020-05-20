@@ -6,6 +6,8 @@
 
 #include <glm/vec3.hpp>
 
+#include "opengl/shaders/shader_program.h"
+
 namespace VisualGlow
 {
     class Camera
@@ -15,8 +17,13 @@ namespace VisualGlow
         glm::vec3 velocity;
         glm::vec3 acceleration;
 
-        Camera(glm::vec3 position = glm::vec3(0.0, 0.0, 0.0), glm::vec3 velocity = glm::vec3(0.0, 0.0, 0.0), glm::vec3 acceleration = glm::vec3(0.0, 0.0, 0.0));
+        float maximumHitDistance;
+        float minimumHitDistance;
 
-        void update(float dt);
+        Camera(glm::vec3 position = glm::vec3(0.0, 0.0, 0.0), glm::vec3 velocity = glm::vec3(0.0, 0.0, 0.0), glm::vec3 acceleration = glm::vec3(0.0, 0.0, 0.0), float maximumHitDistance = 100.0f, float minimumHitDistance = 0.001f);
+
+        void Update(float dt);
+        void RenderEditorModule();
+        void SendShaderData(const ShaderProgram& shaderProgram) const;
     };
 }

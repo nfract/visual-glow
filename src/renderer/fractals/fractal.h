@@ -11,7 +11,7 @@ namespace VisualGlow
     class Fractal
     {
     public:
-        virtual void RenderEditor() = 0;
+        virtual void RenderEditorModule() = 0;
         virtual void SendShaderData(const ShaderProgram& shaderProgram) const = 0;
     };
 }

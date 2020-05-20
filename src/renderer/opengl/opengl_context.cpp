@@ -4,6 +4,7 @@
 
 #include "opengl_context.h"
 
+#include <chrono>
 #include <vector>
 
 #include "gui/opengl_imgui.h"
@@ -11,6 +12,8 @@
 #include "vertex_array_buffer.h"
 #include "index_buffer.h"
 
+#include "../camera.h"
+#include "../fractals/discrete_fractal.h"
 #include "../../imgui/imgui.h"
 #include "../../core/constants.h"
 
@@ -73,26 +76,48 @@ namespace VisualGlow
 
         IndexBuffer indexBuffer(indices, 6);
 
+        ShaderProgram shaderProgram("shaders/vertex.glsl", "shaders/fragment.glsl");
+        shaderProgram.Bind();
+
         OPENGLIMGUI imgui(windowInstance);
+        DiscreteFractal discreteFractal;
+        Camera camera;
+
+        float dt = 0.0f;
 
         while (!glfwWindowShouldClose(windowInstance))
         {
+            // POLL FOR EVENTS AND START MEASURING DT
+            auto start = std::chrono::high_resolution_clock::now();
             glfwPollEvents();
 
+            // UPDATE THE CAMERA DUH
+            camera.Update(dt);
+
+            // SEND SHADER DATA
+            shaderProgram.UniformFloat("u_dt", dt);
+            shaderProgram.UniformVec3("u_Resolution", glm::vec3(windowConfiguration.width, windowConfiguration.height, 0.0f));
+            discreteFractal.SendShaderData(shaderProgram);
+            camera.SendShaderData(shaderProgram);
+
+            // OPENGL CLEAR BUFFER BIT ETC...
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-            // RENDER IMGUI
-            imgui.NewFrame();
-
-            imgui.Render();
-
             // DRAW THE RECTANGLE TO THE SCREEN
             arrayBuffer.Bind();
-            arrayBuffer.UnbindLayout(0);
+            arrayBuffer.BindLayout(0);
+            indexBuffer.Bind();
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
+            // RENDER IMGUI
+            imgui.NewFrame();
+            discreteFractal.RenderEditorModule();
+            camera.RenderEditorModule();
+            imgui.Render();
+
             glfwSwapBuffers(windowInstance);
+            dt = std::chrono::duration<float, std::milli>(std::chrono::high_resolution_clock::now() - start).count();
         }
     }
 }

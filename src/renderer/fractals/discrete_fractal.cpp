@@ -8,35 +8,44 @@
 
 namespace VisualGlow
 {
-    void DiscreteFractal::RenderEditor()
+    void DiscreteFractal::RenderEditorModule()
     {
         ImGui::Begin("Discrete Fractal");
 
         if (ImGui::CollapsingHeader("Interpolation"))
         {
-            ImGui::SliderFloat("High Distortion", &interpolation.highDistortion, 0.0f, 2.5f);
-            ImGui::SliderFloat("Low Distortion", &interpolation.lowDistortion, 0.0f, 2.5f);
-            ImGui::SliderFloat("Interpolated Glow", &interpolation.discreteGlow, 0.0f, 1.1f);
+            ImGui::SliderFloat("High Distortion", &interpolation.highDistortion, 0.0f, 10.0f);
+            ImGui::SliderFloat("Low Distortion", &interpolation.lowDistortion, 0.0f, 10.0f);
+            ImGui::SliderFloat("Discrete Glow", &interpolation.discreteGlow, 0.0f, 1.1f);
         }
 
         ImGui::Separator();
 
         if (ImGui::CollapsingHeader("Top Volume"))
         {
-            ImGui::ColorEdit3("Color",    topVolume.rgb, 0);
-            ImGui::SliderFloat("Scale",  &topVolume.scale, 0.0f, 5.0f);
-            ImGui::SliderFloat("Offset", &topVolume.offset, 0.0, 0.1f);
-            ImGui::SliderFloat("Bias",   &topVolume.bias, 0.0, 5.0f);
+            ImGui::ColorEdit3("Top Volume Color",    topVolume.rgb, 0);
+            ImGui::SliderFloat("Top Volume Scale",  &topVolume.scale, 0.0f, 5.0f);
+            ImGui::SliderFloat("Top Volume Offset", &topVolume.offset, 0.0, 0.1f);
+            ImGui::SliderFloat("Top Volume Bias",   &topVolume.bias, 0.0, 5.0f);
         }
 
         ImGui::Separator();
 
         if (ImGui::CollapsingHeader("Bottom Volume"))
         {
-            ImGui::ColorEdit3("Color",    bottomVolume.rgb, 0);
-            ImGui::SliderFloat("Scale",  &bottomVolume.scale, 0.0f, 5.0f);
-            ImGui::SliderFloat("Offset", &bottomVolume.offset, 0.0, 0.1f);
-            ImGui::SliderFloat("Bias",   &bottomVolume.bias, 0.0, 5.0f);
+            ImGui::ColorEdit3("Bottom Volume Color",    bottomVolume.rgb, 0);
+            ImGui::SliderFloat("Bottom Volume Scale",  &bottomVolume.scale, 0.0f, 15.0f);
+            ImGui::SliderFloat("Bottom Volume Offset", &bottomVolume.offset, 0.0, 5.0f);
+            ImGui::SliderFloat("Bottom Volume Bias",   &bottomVolume.bias, 0.0, 15.0f);
+        }
+
+        ImGui::Separator();
+
+        if (ImGui::CollapsingHeader("Combination Volume"))
+        {
+            ImGui::ColorEdit3("Combination Volume Color",         combinationVolume.rgb, 0);
+            ImGui::SliderFloat("Combination Volume Multiplier",  &combinationVolume.multplier, 0.0f, 15.0f);
+            ImGui::SliderFloat("Combination Volume Thickness",   &combinationVolume.thickness, 0.0, 15.0f);
         }
 
         ImGui::End();
@@ -57,5 +66,9 @@ namespace VisualGlow
         shaderProgram.UniformFloat("u_BottomVolumeScale",  bottomVolume.scale);
         shaderProgram.UniformFloat("u_BottomVolumeOffset", bottomVolume.offset);
         shaderProgram.UniformFloat("u_BottomVolumeBias",   bottomVolume.bias);
+
+        shaderProgram.UniformVec3("u_CombinationVolumeColor",   glm::vec3(combinationVolume.rgb[0], combinationVolume.rgb[1], combinationVolume.rgb[2]));
+        shaderProgram.UniformFloat("u_CombinationVolumeMultiplier",  combinationVolume.multplier);
+        shaderProgram.UniformFloat("u_CombinationVolumeThickness", combinationVolume.thickness);
     }
 }
