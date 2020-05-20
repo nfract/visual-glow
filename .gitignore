@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Locally Ignored Folders & Files
+libraries/
+cmake-build-debug/
+cmake-build-release/
