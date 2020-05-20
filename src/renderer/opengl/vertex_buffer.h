@@ -2,10 +2,9 @@
 // Created by Brandon on 5/18/2020.
 //
 
-#ifndef VISUAL_GLOW_VERTEX_BUFFER_H
-#define VISUAL_GLOW_VERTEX_BUFFER_H
+#pragma once
 
-namespace VisualGlow::Graphics
+namespace VisualGlow::Renderer
 {
     class VertexBuffer
     {
@@ -21,5 +20,3 @@ namespace VisualGlow::Graphics
         void Unbind() const;
     };
 }
-
-#endif

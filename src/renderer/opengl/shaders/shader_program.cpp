@@ -9,7 +9,7 @@
 
 #include "../../../core/constants.h"
 
-namespace VisualGlow::Graphics
+namespace VisualGlow::Renderer
 {
     ShaderProgram::ShaderProgram(const std::string& vertexFile, const std::string& fragmentFile)
     {

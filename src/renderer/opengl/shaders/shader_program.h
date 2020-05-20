@@ -2,15 +2,14 @@
 // Created by Brandon on 5/18/2020.
 //
 
-#ifndef VISUAL_GLOW_SHADER_PROGRAM_H
-#define VISUAL_GLOW_SHADER_PROGRAM_H
+#pragma once
 
 #include <string>
 #include <unordered_map>
 
 #include <GLM/matrix.hpp>
 
-namespace VisualGlow::Graphics
+namespace VisualGlow::Renderer
 {
     class ShaderProgram
     {
@@ -35,5 +34,3 @@ namespace VisualGlow::Graphics
         unsigned int Compile(unsigned int type, const std::string& shaderSource) const;
     };
 }
-
-#endif

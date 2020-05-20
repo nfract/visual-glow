@@ -10,7 +10,7 @@
 #include <sstream>
 #include <fstream>
 
-#define VGLOW_LOG(x)   std::cout << "vg_nfo:  "  << x << std::endl;
+#define VGLOW_INFO(x)   std::cout << "vg_info:  "  << x << std::endl;
 #define VGLOW_ERROR(x) std::cout << "vg_error: " << x << std::endl;
 
 namespace VisualGlow

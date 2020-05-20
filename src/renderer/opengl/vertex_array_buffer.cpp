@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-namespace VisualGlow::Graphics
+namespace VisualGlow::Renderer
 {
     VertexArrayBuffer::VertexArrayBuffer()
     {

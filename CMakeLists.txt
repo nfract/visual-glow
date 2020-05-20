@@ -14,7 +14,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB_RECURSE SOURCESS "src/*.cpp" "src/*.hpp")
 
+add_compile_definitions(VGLOW_USE_OPENGL)
 add_compile_definitions(GLEW_STATIC)
-add_executable(visual_glow ${SOURCESS} src/core/parameters.h)
+add_executable(visual_glow ${SOURCESS} src/renderer/renderer_context.h)
 target_include_directories(visual_glow PUBLIC ${STATIC_LIBRARY_INCLUDES})
 target_link_libraries(visual_glow ${STATIC_LIBRARIES})
