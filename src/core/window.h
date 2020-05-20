@@ -6,17 +6,18 @@
 
 #include "../renderer/renderer_context.h"
 
-namespace VisualGlow::Core
+namespace VisualGlow
 {
     class Window
     {
     private:
-        Renderer::RendererContext* rendererContext;
+        WindowConfiguration& windowConfiguration;
+        const RendererContext& rendererContext;
 
     public:
-        Window(Renderer::RendererContext* rendererContext);
+        Window(WindowConfiguration& windowConfiguration, const RendererContext& rendererContext);
         ~Window();
 
-        void start() const;
+        void Start() const;
     };
 }

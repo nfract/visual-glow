@@ -9,7 +9,7 @@
 
 #include "../../../core/constants.h"
 
-namespace VisualGlow::Renderer
+namespace VisualGlow
 {
     ShaderProgram::ShaderProgram(const std::string& vertexFile, const std::string& fragmentFile)
     {
@@ -58,11 +58,11 @@ namespace VisualGlow::Renderer
             switch (type)
             {
                 case GL_VERTEX_SHADER:
-                    VGLOW_ERROR("(vertex shader) " << infoLog.data());
+                    VGLOW_ERROR("VERT_SHADER_ERROR " << infoLog.data());
                     break;
 
                 case GL_FRAGMENT_SHADER:
-                    VGLOW_ERROR("(fragment shader) " << infoLog.data());
+                    VGLOW_ERROR("FRAG_SHADER_ERROR " << infoLog.data());
                     break;
             }
 

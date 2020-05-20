@@ -16,6 +16,6 @@ file(GLOB_RECURSE SOURCESS "src/*.cpp" "src/*.hpp")
 
 add_compile_definitions(VGLOW_USE_OPENGL)
 add_compile_definitions(GLEW_STATIC)
-add_executable(visual_glow ${SOURCESS} src/renderer/renderer_context.h)
+add_executable(visual_glow ${SOURCESS} src/renderer/renderer_context.h src/core/window_configuration.h src/renderer/opengl/gui/opengl_imgui.cpp src/renderer/opengl/gui/opengl_imgui.h src/renderer/camera.cpp src/renderer/camera.h src/renderer/fractals/discrete_fractal.h src/renderer/fractals/discrete_fractal.cpp src/renderer/fractals/fractal.h)
 target_include_directories(visual_glow PUBLIC ${STATIC_LIBRARY_INCLUDES})
 target_link_libraries(visual_glow ${STATIC_LIBRARIES})

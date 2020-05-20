@@ -4,7 +4,7 @@
 
 #pragma once
 
-namespace VisualGlow::Renderer
+namespace VisualGlow
 {
     class VertexBuffer
     {

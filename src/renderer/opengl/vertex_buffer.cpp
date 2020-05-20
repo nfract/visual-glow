@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-namespace VisualGlow::Renderer
+namespace VisualGlow
 {
     VertexBuffer::VertexBuffer(float* data, unsigned int size)
         : size(size)

@@ -7,10 +7,16 @@
 
 int main()
 {
-    VisualGlow::Renderer::OpenGLContext openGL(3, 0);
+    VisualGlow::WindowConfiguration configuration;
+    configuration.width      = 1920;
+    configuration.height     = 1080;
+    configuration.fullscreen = false;
+    configuration.vsync      = false;
 
-    VisualGlow::Core::Window window(&openGL);
-    window.start();
+    VisualGlow::OpenGLContext openGL(configuration, VGLOW_OPENGL_MAJOR_VERSION_3, VGLOW_OPENGL_MINOR_VERSION_3);
+
+    VisualGlow::Window window(configuration, openGL);
+    window.Start();
 
     return 0;
 }

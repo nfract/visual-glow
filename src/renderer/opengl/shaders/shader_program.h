@@ -9,7 +9,7 @@
 
 #include <GLM/matrix.hpp>
 
-namespace VisualGlow::Renderer
+namespace VisualGlow
 {
     class ShaderProgram
     {

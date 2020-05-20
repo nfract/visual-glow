@@ -4,11 +4,20 @@
 
 #pragma once
 
-namespace VisualGlow::Renderer
+#include "../core/window_configuration.h"
+
+namespace VisualGlow
 {
     class RendererContext
     {
+    protected:
+        WindowConfiguration& windowConfiguration;
+
     public:
-        virtual void begin() const = 0;
+        RendererContext(WindowConfiguration& windowConfiguration)
+            : windowConfiguration(windowConfiguration)
+        {}
+
+        virtual void Begin() const = 0;
     };
 }

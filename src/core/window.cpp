@@ -4,20 +4,19 @@
 
 #include "window.h"
 
-namespace VisualGlow::Core
+namespace VisualGlow
 {
-    Window::Window(Renderer::RendererContext* rendererContext)
-        : rendererContext(rendererContext)
+    Window::Window(WindowConfiguration& windowConfiguration, const RendererContext& rendererContext)
+        : windowConfiguration(windowConfiguration), rendererContext(rendererContext)
     {
     }
 
     Window::~Window()
     {
-        delete rendererContext;
     }
 
-    void Window::start() const
+    void Window::Start() const
     {
-        rendererContext->begin();
+        rendererContext.Begin();
     }
 }

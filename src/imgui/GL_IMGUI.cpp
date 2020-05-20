@@ -121,7 +121,7 @@
  - Init: call io.Fonts->GetTexDataAsRGBA32(...), it will build the font atlas texture, then load the texture pixels into renderer memory.
  - Every frame:
     - In your main loop as early a possible, fill the IO fields marked 'Input' (e.g. mouse position, buttons, keyboard info, etc.)
-    - Call ImGui::NewFrame() to begin the frame
+    - Call ImGui::NewFrame() to Begin the frame
     - You can use any ImGui function you want between NewFrame() and Render()
     - Call ImGui::Render() as late as you can to end the frame and finalize render data. it will call your io.RenderDrawListFn handler.
        (Even if you don't render, call Render() and ignore the callback, or call EndFrame() instead. Otherwhise some features will break)
@@ -4013,7 +4013,7 @@ void ImGui::EndFrame()
     {
         if (!g.NavWindow || !g.NavWindow->Appearing) // Unless we just made a window/popup appear
         {
-            // Click to focus window and start moving (after we're done with all our widgets)
+            // Click to focus window and Start moving (after we're done with all our widgets)
             if (g.IO.MouseClicked[0])
             {
                 if (g.HoveredRootWindow != NULL)
@@ -4943,7 +4943,7 @@ void ImGui::ClosePopup(ImGuiID id)
     ClosePopupToLevel(g.OpenPopupStack.Size - 1);
 }
 
-// Close the popup we have begin-ed into.
+// Close the popup we have Begin-ed into.
 void ImGui::CloseCurrentPopup()
 {
     ImGuiContext& g = *GImGui;
@@ -6111,7 +6111,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         if (window->AutoFitFramesY > 0)
             window->AutoFitFramesY--;
 
-        // Apply focus (we need to call FocusWindow() AFTER setting DC.CursorStartPos so our initial navigation reference rectangle can start around there)
+        // Apply focus (we need to call FocusWindow() AFTER setting DC.CursorStartPos so our initial navigation reference rectangle can Start around there)
         if (want_focus)
         {
             FocusWindow(window);
@@ -9765,9 +9765,9 @@ static bool STB_TEXTEDIT_INSERTCHARS(STB_TEXTEDIT_STRING* obj, int pos, const Im
 #define STB_TEXTEDIT_K_RIGHT        0x10001 // keyboard input to move cursor right
 #define STB_TEXTEDIT_K_UP           0x10002 // keyboard input to move cursor up
 #define STB_TEXTEDIT_K_DOWN         0x10003 // keyboard input to move cursor down
-#define STB_TEXTEDIT_K_LINESTART    0x10004 // keyboard input to move cursor to start of line
+#define STB_TEXTEDIT_K_LINESTART    0x10004 // keyboard input to move cursor to Start of line
 #define STB_TEXTEDIT_K_LINEEND      0x10005 // keyboard input to move cursor to end of line
-#define STB_TEXTEDIT_K_TEXTSTART    0x10006 // keyboard input to move cursor to start of text
+#define STB_TEXTEDIT_K_TEXTSTART    0x10006 // keyboard input to move cursor to Start of text
 #define STB_TEXTEDIT_K_TEXTEND      0x10007 // keyboard input to move cursor to end of text
 #define STB_TEXTEDIT_K_DELETE       0x10008 // keyboard input to delete selection or character under cursor
 #define STB_TEXTEDIT_K_BACKSPACE    0x10009 // keyboard input to delete selection or character left of cursor
@@ -12926,7 +12926,7 @@ void ImGui::EndDragDropSource()
         ClearDragDrop();
 }
 
-// Use 'cond' to choose to submit payload on drag start or every frame
+// Use 'cond' to choose to submit payload on drag Start or every frame
 bool ImGui::SetDragDropPayload(const char* type, const void* data, size_t data_size, ImGuiCond cond)
 {
     ImGuiContext& g = *GImGui;

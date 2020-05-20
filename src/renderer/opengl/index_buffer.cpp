@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-namespace VisualGlow::Renderer
+namespace VisualGlow
 {
     IndexBuffer::IndexBuffer(unsigned int *data, unsigned int size)
         : size(size)

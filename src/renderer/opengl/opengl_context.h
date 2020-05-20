@@ -10,7 +10,10 @@
 
 #include "../renderer_context.h"
 
-namespace VisualGlow::Renderer
+#define VGLOW_OPENGL_MAJOR_VERSION_3 3
+#define VGLOW_OPENGL_MINOR_VERSION_3 0
+
+namespace VisualGlow
 {
     class OpenGLContext : public RendererContext
     {
@@ -18,10 +21,10 @@ namespace VisualGlow::Renderer
         GLFWwindow* windowInstance;
 
     public:
-        OpenGLContext(int majorVersion, int minorVersion);
+        OpenGLContext(WindowConfiguration& windowConfiguration, int majorVersion, int minorVersion);
         ~OpenGLContext();
 
-        void begin() const override;
+        void Begin() const override;
 
     };
 }

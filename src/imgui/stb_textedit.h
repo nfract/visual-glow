@@ -145,9 +145,9 @@
 //    STB_TEXTEDIT_K_RIGHT       keyboard input to move cursor right
 //    STB_TEXTEDIT_K_UP          keyboard input to move cursor up
 //    STB_TEXTEDIT_K_DOWN        keyboard input to move cursor down
-//    STB_TEXTEDIT_K_LINESTART   keyboard input to move cursor to start of line  // e.g. HOME
+//    STB_TEXTEDIT_K_LINESTART   keyboard input to move cursor to Start of line  // e.g. HOME
 //    STB_TEXTEDIT_K_LINEEND     keyboard input to move cursor to end of line    // e.g. END
-//    STB_TEXTEDIT_K_TEXTSTART   keyboard input to move cursor to start of text  // e.g. ctrl-HOME
+//    STB_TEXTEDIT_K_TEXTSTART   keyboard input to move cursor to Start of text  // e.g. ctrl-HOME
 //    STB_TEXTEDIT_K_TEXTEND     keyboard input to move cursor to end of text    // e.g. ctrl-END
 //    STB_TEXTEDIT_K_DELETE      keyboard input to delete selection or character under cursor
 //    STB_TEXTEDIT_K_BACKSPACE   keyboard input to delete selection or character left of cursor
@@ -162,9 +162,9 @@
 //    STB_TEXTEDIT_MOVEWORDRIGHT(obj,i)  custom handler for WORDRIGHT, returns index to move cursor to
 //    STB_TEXTEDIT_K_WORDLEFT            keyboard input to move cursor left one word // e.g. ctrl-LEFT
 //    STB_TEXTEDIT_K_WORDRIGHT           keyboard input to move cursor right one word // e.g. ctrl-RIGHT
-//    STB_TEXTEDIT_K_LINESTART2          secondary keyboard input to move cursor to start of line
+//    STB_TEXTEDIT_K_LINESTART2          secondary keyboard input to move cursor to Start of line
 //    STB_TEXTEDIT_K_LINEEND2            secondary keyboard input to move cursor to end of line
-//    STB_TEXTEDIT_K_TEXTSTART2          secondary keyboard input to move cursor to start of text
+//    STB_TEXTEDIT_K_TEXTSTART2          secondary keyboard input to move cursor to Start of text
 //    STB_TEXTEDIT_K_TEXTEND2            secondary keyboard input to move cursor to end of text
 //
 // Todo:
@@ -186,7 +186,7 @@
 // bit so it only decodes WM_CHAR events.
 //
 // STB_TEXTEDIT_LAYOUTROW returns information about the shape of one displayed
-// row of characters assuming they start on the i'th character--the width and
+// row of characters assuming they Start on the i'th character--the width and
 // the height and the number of characters consumed. This allows this library
 // to traverse the entire layout incrementally. You need to compute word-wrapping
 // here.
@@ -214,7 +214,7 @@
 //
 //      click:
 //          call this with the mouse x,y on a mouse down; it will update the cursor
-//          and reset the selection start/end to the cursor point. the x,y must
+//          and reset the selection Start/end to the cursor point. the x,y must
 //          be relative to the text widget, with (0,0) being the top left.
 //     
 //      drag:
@@ -321,11 +321,11 @@ typedef struct
    int cursor;
    // position of the text cursor within the string
 
-   int select_start;          // selection start point
+   int select_start;          // selection Start point
    int select_end;
-   // selection start and end point in characters; if equal, no selection.
-   // note that start may be less than or greater than end (e.g. when
-   // dragging the mouse, start is where the initial click was, and you
+   // selection Start and end point in characters; if equal, no selection.
+   // note that Start may be less than or greater than end (e.g. when
+   // dragging the mouse, Start is where the initial click was, and you
    // can drag in either direction)
 
    unsigned char insert_mode;
