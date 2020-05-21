@@ -11,9 +11,12 @@
 
 class Editor
 {
+private:
+    char textBuffer[256];
+
 public:
     Editor(GLFWwindow* windowInstance);
 
-    void Draw(Camera* camera, Fractal* fractal) const;
+    void Draw(Camera* camera, Fractal* fractal);
 
 };

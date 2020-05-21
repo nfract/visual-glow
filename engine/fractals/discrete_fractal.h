@@ -47,4 +47,7 @@ private:
 public:
     void RenderEditorModule() override;
     void SendShaderData(const ShaderProgram& shaderProgram) const override;
+
+    void ReadBinaryFile(const std::string& filePath) override;
+    void WriteBinaryFile(const std::string& filePath) override;
 };

@@ -4,6 +4,10 @@
 
 #include "discrete_fractal.h"
 
+#include <iostream>
+#include <stdio.h>
+
+#include "../logging.h"
 #include "../../imgui/imgui.h"
 
 void DiscreteFractal::RenderEditorModule()
@@ -68,4 +72,78 @@ void DiscreteFractal::SendShaderData(const ShaderProgram &shaderProgram) const
     shaderProgram.UniformVec3("u_CombinationVolumeColor",   glm::vec3(combinationVolume.rgb[0], combinationVolume.rgb[1], combinationVolume.rgb[2]));
     shaderProgram.UniformFloat("u_CombinationVolumeMultiplier",  combinationVolume.multplier);
     shaderProgram.UniformFloat("u_CombinationVolumeThickness", combinationVolume.thickness);
+}
+
+void DiscreteFractal::ReadBinaryFile(const std::string& filePath)
+{
+    FILE* filePoint;
+
+    if (fopen_s(&filePoint, filePath.c_str(), "rb") != 0)
+    {
+        VGLOW_ERR("could not open file point " << filePath << " for reading")
+        return;
+    }
+
+    fread(&interpolation.highDistortion, 1, sizeof(float), filePoint);
+    fread(&interpolation.lowDistortion,  1, sizeof(float), filePoint);
+    fread(&interpolation.discreteGlow,   1, sizeof(float), filePoint);
+
+    for (int i = 0; i < 3; i++)
+        fread(&topVolume.rgb[i], 1, sizeof(float), filePoint);
+
+    fread(&topVolume.scale,  1, sizeof(float), filePoint);
+    fread(&topVolume.offset, 1, sizeof(float), filePoint);
+    fread(&topVolume.bias,   1, sizeof(float), filePoint);
+
+    for (int i = 0; i < 3; i++)
+        fread(&bottomVolume.rgb[i], 1, sizeof(float), filePoint);
+
+    fread(&bottomVolume.scale,  1, sizeof(float), filePoint);
+    fread(&bottomVolume.offset, 1, sizeof(float), filePoint);
+    fread(&bottomVolume.bias,   1, sizeof(float), filePoint);
+
+    for (int i = 0; i < 3; i++)
+        fread(&combinationVolume.rgb[i], 1, sizeof(float), filePoint);
+
+    fread(&combinationVolume.multplier,  1, sizeof(float), filePoint);
+    fread(&combinationVolume.thickness, 1, sizeof(float), filePoint);
+
+    fclose(filePoint);
+}
+
+void DiscreteFractal::WriteBinaryFile(const std::string& filePath)
+{
+    FILE* filePoint;
+
+    if (fopen_s(&filePoint, filePath.c_str(), "wb") != 0)
+    {
+        VGLOW_ERR("could not open file point " << filePath << " for writing")
+        return;
+    }
+
+    fwrite(&interpolation.highDistortion, 1, sizeof(float), filePoint);
+    fwrite(&interpolation.lowDistortion,  1, sizeof(float), filePoint);
+    fwrite(&interpolation.discreteGlow,   1, sizeof(float), filePoint);
+
+    for (int i = 0; i < 3; i++)
+        fwrite(&topVolume.rgb[i], 1, sizeof(float), filePoint);
+
+    fwrite(&topVolume.scale,  1, sizeof(float), filePoint);
+    fwrite(&topVolume.offset, 1, sizeof(float), filePoint);
+    fwrite(&topVolume.bias,   1, sizeof(float), filePoint);
+
+    for (int i = 0; i < 3; i++)
+        fwrite(&bottomVolume.rgb[i], 1, sizeof(float), filePoint);
+
+    fwrite(&bottomVolume.scale,  1, sizeof(float), filePoint);
+    fwrite(&bottomVolume.offset, 1, sizeof(float), filePoint);
+    fwrite(&bottomVolume.bias,   1, sizeof(float), filePoint);
+
+    for (int i = 0; i < 3; i++)
+        fwrite(&combinationVolume.rgb[i], 1, sizeof(float), filePoint);
+
+    fwrite(&combinationVolume.multplier,  1, sizeof(float), filePoint);
+    fwrite(&combinationVolume.thickness, 1, sizeof(float), filePoint);
+
+    fclose(filePoint);
 }

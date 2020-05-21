@@ -20,6 +20,11 @@ void Camera::RenderEditorModule()
 {
     if (ImGui::Begin("Camera"))
     {
+        ImGui::Text("Hit Distance");
+        ImGui::SliderFloat("Maximum", &maximumHitDistance, 0.0f, 1000.0f);
+        ImGui::SliderFloat("Minimum", &minimumHitDistance, 0.001f, 0.00001f);
+
+        ImGui::Separator();
         ImGui::Text("Position");
         ImGui::SliderFloat("X", &position.x, -500.0f, 500.0f);
         ImGui::SliderFloat("Y", &position.y, -500.0f, 500.0f);
