@@ -11,7 +11,7 @@
 *.gch
 *.pch
 
-# Compiled Dynamic libraries
+# Compiled Dynamic thirdparty
 *.so
 *.dylib
 *.dll
@@ -20,7 +20,7 @@
 *.mod
 *.smod
 
-# Compiled Static libraries
+# Compiled Static thirdparty
 *.lai
 *.la
 *.a
@@ -32,6 +32,6 @@
 *.app
 
 # Locally Ignored Folders & Files
-libraries/
+thirdparty/
 cmake-build-debug/
 cmake-build-release/
