@@ -2,7 +2,7 @@
 // Created by Brandon on 5/18/2020.
 //
 
-#include "../engine/vengine.h"
+#include "../core/renderer.h"
 
 int main()
 {
@@ -10,11 +10,11 @@ int main()
     configuration.width      = 1920;
     configuration.height     = 1080;
     configuration.fullscreen = false;
-    configuration.vsync      = false;
-    configuration.editorMode = true;
+    configuration.vsync      = true;
+    configuration.editor_mode = true;
 
-    VENGINE vengine(configuration, VGLOW_OPENGL_MAJOR_VERSION_3, VGLOW_OPENGL_MINOR_VERSION_3);
-    vengine.Begin();
+    Renderer renderer(configuration, SOFTX86_OPENGL_MAJOR_VERSION_3, SOFTX86_OPENGL_MINOR_VERSION_3);
+    renderer.Begin();
 
     return 0;
 }

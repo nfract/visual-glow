@@ -6,13 +6,14 @@
 
 #include "../imgui/imgui.h"
 
-Camera::Camera(glm::vec3 position, glm::vec3 velocity, glm::vec3 acceleration, float maximumHitDistance, float minimumHitDistance)
-        : position(position), velocity(velocity), acceleration(acceleration), maximumHitDistance(maximumHitDistance), minimumHitDistance(minimumHitDistance)
+#include "logging.h"
+
+Camera::Camera(glm::vec3 position, glm::vec3 velocity, glm::vec3 acceleration, float maximum_hit_distance, float minimum_hit_distance)
+        : position(position), velocity(velocity), acceleration(acceleration), maximum_hit_distance(maximum_hit_distance), minimum_hit_distance(minimum_hit_distance)
 {}
 
 void Camera::Update(float dt)
 {
-    dt /= 1000.0f;
     position += velocity * dt + 0.5f * acceleration * dt * dt;
 }
 
@@ -21,8 +22,8 @@ void Camera::RenderEditorModule()
     if (ImGui::Begin("Camera"))
     {
         ImGui::Text("Hit Distance");
-        ImGui::SliderFloat("Maximum", &maximumHitDistance, 0.0f, 1000.0f);
-        ImGui::SliderFloat("Minimum", &minimumHitDistance, 0.001f, 0.00001f);
+        ImGui::SliderFloat("Maximum", &maximum_hit_distance, 0.0f, 1000.0f);
+        ImGui::SliderFloat("Minimum", &minimum_hit_distance, 0.001f, 0.00001f);
 
         ImGui::Separator();
         ImGui::Text("Position");
@@ -34,9 +35,9 @@ void Camera::RenderEditorModule()
 
         ImGui::Separator();
         ImGui::Text("Velocity");
-        ImGui::SliderFloat("DX", &velocity.x, -1.0f, 1.0f);
-        ImGui::SliderFloat("DY", &velocity.y, -1.0f, 1.0f);
-        ImGui::SliderFloat("DZ", &velocity.z, -1.0f, 1.0f);
+        ImGui::SliderFloat("DX", &velocity.x, -10.0f, 10.0f);
+        ImGui::SliderFloat("DY", &velocity.y, -10.0f, 10.0f);
+        ImGui::SliderFloat("DZ", &velocity.z, -10.0f, 10.0f);
         if (ImGui::Button("Reset DX/DY/DZ"))
             velocity = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -54,7 +55,7 @@ void Camera::RenderEditorModule()
 
 void Camera::SendShaderData(const ShaderProgram &shaderProgram) const
 {
-    shaderProgram.UniformFloat("u_MaxHitDistance", maximumHitDistance);
-    shaderProgram.UniformFloat("u_MinHitDistance", minimumHitDistance);
+    shaderProgram.UniformFloat("u_MaxHitDistance", maximum_hit_distance);
+    shaderProgram.UniformFloat("u_MinHitDistance", minimum_hit_distance);
     shaderProgram.UniformVec3("u_CameraPosition",  glm::vec3(position.x, position.y, position.z));
 }

@@ -10,7 +10,23 @@
 
 class Fractal
 {
+protected:
+    ShaderProgram* shader;
+
 public:
+    Fractal(const std::string& vertexShaderPath, const std::string& fragmentShaderPath)
+    {
+        shader = new ShaderProgram(vertexShaderPath, fragmentShaderPath);
+        shader->Bind();
+    }
+
+    virtual ~Fractal()
+    {
+        delete shader;
+    }
+
+    ShaderProgram* GetShader() { return shader; }
+
     virtual void RenderEditorModule() = 0;
     virtual void SendShaderData(const ShaderProgram& shaderProgram) const = 0;
 

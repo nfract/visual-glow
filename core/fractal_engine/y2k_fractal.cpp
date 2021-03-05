@@ -2,7 +2,7 @@
 // Created by Brandon on 5/20/2020.
 //
 
-#include "discrete_fractal.h"
+#include "y2k_fractal.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -10,7 +10,12 @@
 #include "../logging.h"
 #include "../../imgui/imgui.h"
 
-void DiscreteFractal::RenderEditorModule()
+Y2KFractal::Y2KFractal()
+    : Fractal("shaders/y2k/y2k_vertex.glsl", "shaders/y2k/y2k_fragment.glsl")
+{
+}
+
+void Y2KFractal::RenderEditorModule()
 {
     ImGui::Begin("Discrete Fractal");
 
@@ -46,14 +51,14 @@ void DiscreteFractal::RenderEditorModule()
     if (ImGui::CollapsingHeader("Combination Volume"))
     {
         ImGui::ColorEdit3("Combination Volume Color",         combinationVolume.rgb, 0);
-        ImGui::SliderFloat("Combination Volume Multiplier",  &combinationVolume.multplier, 0.0f, 15.0f);
+        ImGui::SliderFloat("Combination Volume Multiplier", &combinationVolume.multiplier, 0.0f, 15.0f);
         ImGui::SliderFloat("Combination Volume Thickness",   &combinationVolume.thickness, 0.0, 15.0f);
     }
 
     ImGui::End();
 }
 
-void DiscreteFractal::SendShaderData(const ShaderProgram &shaderProgram) const
+void Y2KFractal::SendShaderData(const ShaderProgram &shaderProgram) const
 {
     shaderProgram.UniformFloat("u_HighDistortion", interpolation.highDistortion);
     shaderProgram.UniformFloat("u_LowDistortion",  interpolation.lowDistortion);
@@ -70,17 +75,17 @@ void DiscreteFractal::SendShaderData(const ShaderProgram &shaderProgram) const
     shaderProgram.UniformFloat("u_BottomVolumeBias",   bottomVolume.bias);
 
     shaderProgram.UniformVec3("u_CombinationVolumeColor",   glm::vec3(combinationVolume.rgb[0], combinationVolume.rgb[1], combinationVolume.rgb[2]));
-    shaderProgram.UniformFloat("u_CombinationVolumeMultiplier",  combinationVolume.multplier);
+    shaderProgram.UniformFloat("u_CombinationVolumeMultiplier",  combinationVolume.multiplier);
     shaderProgram.UniformFloat("u_CombinationVolumeThickness", combinationVolume.thickness);
 }
 
-void DiscreteFractal::ReadBinaryFile(const std::string& filePath)
+void Y2KFractal::ReadBinaryFile(const std::string& filePath)
 {
     FILE* filePoint;
 
     if (fopen_s(&filePoint, filePath.c_str(), "rb") != 0)
     {
-        VGLOW_ERR("could not open file point " << filePath << " for reading")
+        SOFTX86_ERR("could not open file point " << filePath << " for reading")
         return;
     }
 
@@ -105,19 +110,19 @@ void DiscreteFractal::ReadBinaryFile(const std::string& filePath)
     for (int i = 0; i < 3; i++)
         fread(&combinationVolume.rgb[i], 1, sizeof(float), filePoint);
 
-    fread(&combinationVolume.multplier,  1, sizeof(float), filePoint);
+    fread(&combinationVolume.multiplier, 1, sizeof(float), filePoint);
     fread(&combinationVolume.thickness, 1, sizeof(float), filePoint);
 
     fclose(filePoint);
 }
 
-void DiscreteFractal::WriteBinaryFile(const std::string& filePath)
+void Y2KFractal::WriteBinaryFile(const std::string& filePath)
 {
     FILE* filePoint;
 
     if (fopen_s(&filePoint, filePath.c_str(), "wb") != 0)
     {
-        VGLOW_ERR("could not open file point " << filePath << " for writing")
+        SOFTX86_ERR("could not open file point " << filePath << " for writing")
         return;
     }
 
@@ -142,7 +147,7 @@ void DiscreteFractal::WriteBinaryFile(const std::string& filePath)
     for (int i = 0; i < 3; i++)
         fwrite(&combinationVolume.rgb[i], 1, sizeof(float), filePoint);
 
-    fwrite(&combinationVolume.multplier,  1, sizeof(float), filePoint);
+    fwrite(&combinationVolume.multiplier, 1, sizeof(float), filePoint);
     fwrite(&combinationVolume.thickness, 1, sizeof(float), filePoint);
 
     fclose(filePoint);

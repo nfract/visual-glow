@@ -56,11 +56,11 @@ uint32_t ShaderProgram::Compile(uint32_t type, const std::string& shaderSource) 
         switch (type)
         {
             case GL_VERTEX_SHADER:
-                VGLOW_ERR("(vert_shader_err) " << infoLog.data());
+                SOFTX86_ERR("(vert_shader_err) " << infoLog.data());
                 break;
 
             case GL_FRAGMENT_SHADER:
-                VGLOW_ERR("(frag_shader_err) " << infoLog.data());
+                SOFTX86_ERR("(frag_shader_err) " << infoLog.data());
                 break;
         }
 
@@ -113,7 +113,7 @@ std::string ShaderProgram::ReadFile(const std::string& filePath) const
 
     std::ifstream fileStream(filePath);
     if (!fileStream.is_open())
-        VGLOW_ERR("could not read file " << filePath)
+        SOFTX86_ERR("could not read file " << filePath)
 
     while (getline(fileStream, line))
         contents << line << "\n";

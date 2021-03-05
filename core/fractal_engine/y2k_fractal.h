@@ -6,7 +6,7 @@
 
 #include "fractal.h"
 
-class DiscreteFractal : public Fractal
+class Y2KFractal : public Fractal
 {
     struct Interpolation
     {
@@ -34,7 +34,7 @@ class DiscreteFractal : public Fractal
     struct CombinationVolume
     {
         float rgb[3] = { .0f, .0f, 0.0f };
-        float multplier  = 1.0f;
+        float multiplier  = 1.0f;
         float thickness  = 1.0f;
     };
 
@@ -45,6 +45,8 @@ private:
     CombinationVolume combinationVolume;
 
 public:
+    Y2KFractal();
+
     void RenderEditorModule() override;
     void SendShaderData(const ShaderProgram& shaderProgram) const override;
 
